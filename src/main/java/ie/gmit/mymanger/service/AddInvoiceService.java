@@ -22,7 +22,7 @@ public class AddInvoiceService {
 		try {
 			invoices.save(invoice);
 		} catch (DataIntegrityViolationException e) {
-			throw new IllegalArgumentException("Formato de data inválido");
+			throw new IllegalArgumentException("Invalid date format");
 		}
 	}
 
@@ -30,7 +30,7 @@ public class AddInvoiceService {
 		invoices.delete(codigo);
 	}
 
-	public String receber(Long codigo) {
+	public String receive(Long codigo) {
 		Invoice invoice = invoices.findOne(codigo);
 		invoice.setStatus(StatusInvoice.RECEIVED);
 		invoices.save(invoice);
@@ -39,8 +39,8 @@ public class AddInvoiceService {
 	}
 
 	public List<Invoice> Filter(InvoiceFilter filter) {
-		String costomer = filter.getCostomer() == null ? "%" : filter.getCostomer();
-		return invoices.findByCostomerContaining(costomer);
+		String customer = filter.getCustomer() == null ? "%" : filter.getCustomer();
+		return invoices.findByCustomerContaining(customer);
 	}
 
 }

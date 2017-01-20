@@ -45,7 +45,7 @@ public class MyManagerController {
 		
 		try {
 			addInvoiceService.save(invoice);
-			attributes.addFlashAttribute("message", "Título salvo com sucesso!");
+			attributes.addFlashAttribute("message", "Invoice saved successfully!");
 			return "redirect:/invoices/newinvoice";
 		} catch (IllegalArgumentException e) {
 			errors.rejectValue("duedate", null, e.getMessage());
@@ -73,13 +73,13 @@ public class MyManagerController {
 	public String excluir(@PathVariable Long code, RedirectAttributes attributes) {
 		addInvoiceService.delete(code);
 		
-		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+		attributes.addFlashAttribute("message", "Invoice deleted successfully!");
 		return "redirect:/invoices";
 	}
 	
-	@RequestMapping(value = "/{code}/receber", method = RequestMethod.PUT)
-	public @ResponseBody String receber(@PathVariable Long code) {
-		return addInvoiceService.receber(code);
+	@RequestMapping(value = "/{code}/receive", method = RequestMethod.PUT)
+	public @ResponseBody String receive(@PathVariable Long code) {
+		return addInvoiceService.receive(code);
 	}
 	
 	@ModelAttribute("allStatusInvoice")

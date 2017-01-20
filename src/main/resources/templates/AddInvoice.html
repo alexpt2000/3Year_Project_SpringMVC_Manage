@@ -5,10 +5,10 @@
     layout:decorator="LayoutDefault">
 
 <head>
-	<title>Cadastro de título</title>
+	<title>Add Invoice</title>
 </head>
 
-<section layout:fragment="conteudo">
+<section layout:fragment="content">
     <form class="form-horizontal" method="POST" th:action="@{/invoices}" th:object="${invoice}">
     	<div layout:include="Messages"></div>
     	<div layout:include="MessageError"></div>
@@ -24,10 +24,10 @@
     		<div class="panel-body">
     			<input type="hidden" th:field="*{code}"/>
     		
-				<div class="form-group" th:classappend="${#fields.hasErrors('costomer')} ? has-error">
-					<label for="costomer" class="col-sm-2 control-label">Costomer</label>
+				<div class="form-group" th:classappend="${#fields.hasErrors('customer')} ? has-error">
+					<label for="customer" class="col-sm-2 control-label">Customer</label>
 					<div class="col-sm-4"> 
-						<input type="text" class="form-control" id="costomer" th:field="*{costomer}"/>
+						<input type="text" class="form-control" id="customer" th:field="*{customer}"/>
 					</div>
 				</div>
 				<div class="form-group" th:classappend="${#fields.hasErrors('duedate')} ? has-error">

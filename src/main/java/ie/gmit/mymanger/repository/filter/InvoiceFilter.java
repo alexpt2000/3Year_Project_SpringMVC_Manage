@@ -2,14 +2,14 @@ package ie.gmit.mymanger.repository.filter;
 
 public class InvoiceFilter {
 
-	private String costomer;
+	private String customer;
 
-	public String getCostomer() {
-		return costomer;
+	public String getCustomer() {
+		return customer;
 	}
 
-	public void setCostomer(String descricao) {
-		this.costomer = costomer;
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 
 }

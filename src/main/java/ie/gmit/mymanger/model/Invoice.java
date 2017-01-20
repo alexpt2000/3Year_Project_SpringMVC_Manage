@@ -27,18 +27,18 @@ public class Invoice {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long code;
 	
-	@NotEmpty(message = "Descrição é obrigatória")
-	@Size(max = 60, message = "A descrição não pode conter mais de 60 caracteres")
-	private String costomer;
+	@NotEmpty(message = "Customer is required")
+	@Size(max = 60, message = "The customer can not contain more than 60 characters")
+	private String customer;
 	
-	@NotNull(message = "Date de vencimento é obrigatória")
+	@NotNull(message = "Due date is mandatory")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
 	private Date duedate;
 	
-	@NotNull(message = "Valor é obrigatório")
-	@DecimalMin(value = "0.01", message = "Valor não pode ser menor que 0,01")
-	@DecimalMax(value = "9999999.99", message = "Valor não pode ser maior que 9.999.999,99")
+	@NotNull(message = "Total is mandatory")
+	@DecimalMin(value = "0.01", message = "Total can not be less than 0.01")
+	@DecimalMax(value = "9999999.99", message = "Total can not be greater than 9.999.999,99")
 	@NumberFormat(pattern = "#,##0.00")
 	private BigDecimal total;
 	
@@ -54,12 +54,12 @@ public class Invoice {
 		this.code = code;
 	}
 
-	public String getCostomer() {
-		return costomer;
+	public String getCustomer() {
+		return customer;
 	}
 
-	public void setCostomer(String costomer) {
-		this.costomer = costomer;
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 
 	public Date getDuedate() {
