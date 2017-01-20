@@ -16,45 +16,45 @@
     	<div class="panel panel-default">
     		<div class="panel-heading">
     			<div class="clearfix">
-	   				<h1 class="panel-title aw-invoice-panel">Novo título</h1>
-	   				<a class="btn btn-link aw-link-panel" th:href="@{/invoices}">Voltar para pesquisa</a>
+	   				<h1 class="panel-title aw-invoice-panel">New Invoice</h1>
+	   				<a class="btn btn-link aw-link-panel" th:href="@{/invoices}">Back to Invoices</a>
 	   			</div>
     		</div>
     		
     		<div class="panel-body">
-    			<input type="hidden" th:field="*{codigo}"/>
+    			<input type="hidden" th:field="*{code}"/>
     		
-				<div class="form-group" th:classappend="${#fields.hasErrors('descricao')} ? has-error">
-					<label for="descricao" class="col-sm-2 control-label">Descrição</label>
+				<div class="form-group" th:classappend="${#fields.hasErrors('costomer')} ? has-error">
+					<label for="costomer" class="col-sm-2 control-label">Costomer</label>
 					<div class="col-sm-4"> 
-						<input type="text" class="form-control" id="descricao" th:field="*{descricao}"/>
+						<input type="text" class="form-control" id="costomer" th:field="*{costomer}"/>
 					</div>
 				</div>
-				<div class="form-group" th:classappend="${#fields.hasErrors('dataVencimento')} ? has-error">
-					<label for="dataVencimento" class="col-sm-2 control-label">Data de vencimento</label>
+				<div class="form-group" th:classappend="${#fields.hasErrors('duedate')} ? has-error">
+					<label for="duedate" class="col-sm-2 control-label">Due date</label>
 					<div class="col-sm-2">  
-						<input type="text" class="form-control"	id="dataVencimento" th:field="*{dataVencimento}"
+						<input type="text" class="form-control"	id="duedate" th:field="*{duedate}"
 							data-provide="datepicker" data-date-format="dd/mm/yyyy" data-date-language="pt-BR"
 							data-date-autoclose="true" data-date-today-highlight="true" data-date-orientation="bottom"/>
 					</div>
 				</div>
-				<div class="form-group" th:classappend="${#fields.hasErrors('valor')} ? has-error">
-					<label for="valor" class="col-sm-2 control-label">Valor</label>
+				<div class="form-group" th:classappend="${#fields.hasErrors('total')} ? has-error">
+					<label for="valor" class="col-sm-2 control-label">Total</label>
 					<div class="col-sm-2">   
-						<input type="text" class="form-control js-currency" id="valor" th:field="*{valor}"/>
+						<input type="text" class="form-control js-currency" id="total" th:field="*{total}"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="status" class="col-sm-2 control-label">Status</label>
 					<div class="col-sm-2">
 						<select class="form-control" name="status" th:field="*{status}">
-							<option th:each="status : ${todosStatusinvoice}" th:value="${status}" th:text="${status.descricao}"></option>
+							<option th:each="status : ${allStatusInvoice}" th:value="${status}" th:text="${status.description}"></option>
                     	</select>
                     </div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">Salvar</button>
+						<button type="submit" class="btn btn-primary">Save</button>
 					</div>
 				</div>
 			</div>

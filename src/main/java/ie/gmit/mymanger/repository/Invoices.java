@@ -8,6 +8,6 @@ import ie.gmit.mymanger.model.Invoice;
 
 public interface Invoices extends JpaRepository<Invoice, Long> {
 
-	public List<Invoice> findByDescricaoContaining(String descricao);
-	
+	public List<Invoice> findByCostomerContaining(String costomer);
+
 }

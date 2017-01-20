@@ -17,7 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ie.gmit.mymanger.model.StatusInvoice;
 import ie.gmit.mymanger.model.Invoice;
-import ie.gmit.mymanger.repository.filter.TituloFilter;
+import ie.gmit.mymanger.repository.filter.InvoiceFilter;
 import ie.gmit.mymanger.service.AddInvoiceService;
 
 
@@ -31,59 +31,59 @@ public class MyManagerController {
 	private AddInvoiceService addInvoiceService;
 
 	@RequestMapping("/newinvoice")
-	public ModelAndView novo() {
+	public ModelAndView newInvoice() {
 		ModelAndView mv = new ModelAndView(ADD_INVOICE);
 		mv.addObject(new Invoice());
 		return mv;
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String salvar(@Validated Invoice invoice, Errors errors, RedirectAttributes attributes) {
+	public String save(@Validated Invoice invoice, Errors errors, RedirectAttributes attributes) {
 		if (errors.hasErrors()) {
 			return ADD_INVOICE;
 		}
 		
 		try {
-			addInvoiceService.salvar(invoice);
-			attributes.addFlashAttribute("mensagem", "Título salvo com sucesso!");
+			addInvoiceService.save(invoice);
+			attributes.addFlashAttribute("message", "Título salvo com sucesso!");
 			return "redirect:/invoices/newinvoice";
 		} catch (IllegalArgumentException e) {
-			errors.rejectValue("dataVencimento", null, e.getMessage());
+			errors.rejectValue("duedate", null, e.getMessage());
 			return ADD_INVOICE;
 		}
 	}
 	
 	@RequestMapping
-	public ModelAndView pesquisar(@ModelAttribute("filtro") TituloFilter filtro) {
-		List<Invoice> todosTitulos = addInvoiceService.filtrar(filtro);
+	public ModelAndView search(@ModelAttribute("filter") InvoiceFilter filter) {
+		List<Invoice> allInvoices = addInvoiceService.Filter(filter);
 		
 		ModelAndView mv = new ModelAndView("ListInvoice");
-		mv.addObject("titulos", todosTitulos);
+		mv.addObject("invoices", allInvoices);
 		return mv;
 	}
 	
-	@RequestMapping("{codigo}")
-	public ModelAndView edicao(@PathVariable("codigo") Invoice invoice) {
+	@RequestMapping("{code}")
+	public ModelAndView edicao(@PathVariable("code") Invoice invoice) {
 		ModelAndView mv = new ModelAndView(ADD_INVOICE); 
 		mv.addObject(invoice);
 		return mv;
 	}
 	
-	@RequestMapping(value="{codigo}", method = RequestMethod.DELETE)
-	public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
-		addInvoiceService.excluir(codigo);
+	@RequestMapping(value="{code}", method = RequestMethod.DELETE)
+	public String excluir(@PathVariable Long code, RedirectAttributes attributes) {
+		addInvoiceService.delete(code);
 		
 		attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
 		return "redirect:/invoices";
 	}
 	
-	@RequestMapping(value = "/{codigo}/receber", method = RequestMethod.PUT)
-	public @ResponseBody String receber(@PathVariable Long codigo) {
-		return addInvoiceService.receber(codigo);
+	@RequestMapping(value = "/{code}/receber", method = RequestMethod.PUT)
+	public @ResponseBody String receber(@PathVariable Long code) {
+		return addInvoiceService.receber(code);
 	}
 	
-	@ModelAttribute("todosStatusTitulo")
-	public List<StatusInvoice> todosStatusTitulo() {
+	@ModelAttribute("allStatusInvoice")
+	public List<StatusInvoice> allStatusInvoice() {
 		return Arrays.asList(StatusInvoice.values());
 	}
 	

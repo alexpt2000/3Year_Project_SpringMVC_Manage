@@ -20,12 +20,12 @@
 	   	</div>
 	   	
 	   	<div class="panel-body">
-	   		<form method="GET" class="form-horizontal" th:action="@{/invoices}" th:object="${filtro}">
+	   		<form method="GET" class="form-horizontal" th:action="@{/invoices}" th:object="${filter}">
 	   			<div class="form-group">
 	   				<div class="col-sm-4">
 	   					<div class="input-group">
 	   						<input class="form-control" placeholder="Search Customer"
-	   							autofocus="autofocus" th:field="*{descricao}"></input>
+	   							autofocus="autofocus" th:field="*{costomer}"></input>
 	   						<span class="input-group-btn">
 	   							<button type="submit" class="btn btn-default">
 	   								<i class="glyphicon glyphicon-search"></i>
@@ -51,12 +51,12 @@
 		   			<tbody>
 		   				<tr th:each="invoice : ${invoices}">
 		   					<td class="text-center" th:text="${invoice.code}">1</td>
-		   					<td th:text="${invoice.descricao}"></td>
-		   					<td class="text-center" th:text="${{invoice.dataVencimento}}"></td>
-		   					<td class="text-right" th:text="|€ ${{invoice.valor}}|"></td>
+		   					<td th:text="${invoice.costomer}"></td>
+		   					<td class="text-center" th:text="${{invoice.duedate}}"></td>
+		   					<td class="text-right" th:text="|€ ${{invoice.total}}|"></td>
 		   					<td class="text-center" th:attr="data-role=${invoice.code}">
-		   						<span class="label" th:text="${invoice.status.descricao}"
-		   							th:classappend="${invoice.pendente ? 'label-danger' : 'label-success'}"></span>
+		   						<span class="label" th:text="${invoice.status.description}"
+		   							th:classappend="${invoice.pending ? 'label-danger' : 'label-success'}"></span>
 		   					</td>
 		   					<td class="text-center">
 		   						<a class="btn btn-link btn-xs" th:href="@{/invoices/{code}(code=${invoice.code})}" 
@@ -64,11 +64,11 @@
 		   							<span class="glyphicon glyphicon-pencil"></span>
 		   						</a>
 		   						<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal"
-		   								th:attr="data-code=${invoice.code}, data-descricao=${invoice.descricao}"
+		   								th:attr="data-code=${invoice.code}, data-costomer=${invoice.costomer}"
 		   								title="Excluir" rel="tooltip" data-placement="top">
 		   							<span class="glyphicon glyphicon-remove"></span>
 		   						</a>
-		   						<a class="btn btn-link btn-xs js-atualizar-status" th:if="${invoice.pendente}"
+		   						<a class="btn btn-link btn-xs js-atualizar-status" th:if="${invoice.pending}"
 		   								title="Receber" rel="tooltip" data-placement="top"
 		   								th:attr="data-code=${invoice.code}"
 		   								th:href="@{/invoices/{code}/receber(code=${invoice.code})}">

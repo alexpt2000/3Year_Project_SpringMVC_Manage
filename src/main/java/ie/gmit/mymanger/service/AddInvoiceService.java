@@ -9,15 +9,16 @@ import org.springframework.stereotype.Service;
 import ie.gmit.mymanger.model.StatusInvoice;
 import ie.gmit.mymanger.model.Invoice;
 import ie.gmit.mymanger.repository.Invoices;
-import ie.gmit.mymanger.repository.filter.TituloFilter;
+import ie.gmit.mymanger.repository.filter.InvoiceFilter;
+
 
 @Service
 public class AddInvoiceService {
 
 	@Autowired
 	private Invoices invoices;
-	
-	public void salvar(Invoice invoice) {
+
+	public void save(Invoice invoice) {
 		try {
 			invoices.save(invoice);
 		} catch (DataIntegrityViolationException e) {
@@ -25,21 +26,21 @@ public class AddInvoiceService {
 		}
 	}
 
-	public void excluir(Long codigo) {
+	public void delete(Long codigo) {
 		invoices.delete(codigo);
 	}
 
 	public String receber(Long codigo) {
 		Invoice invoice = invoices.findOne(codigo);
-		invoice.setStatus(StatusInvoice.RECEBIDO);
+		invoice.setStatus(StatusInvoice.RECEIVED);
 		invoices.save(invoice);
-		
-		return StatusInvoice.RECEBIDO.getDescricao();
+
+		return StatusInvoice.RECEIVED.getDescription();
 	}
-	
-	public List<Invoice> filtrar(TituloFilter filtro) {
-		String descricao = filtro.getDescricao() == null ? "%" : filtro.getDescricao();
-		return invoices.findByDescricaoContaining(descricao);
+
+	public List<Invoice> Filter(InvoiceFilter filter) {
+		String costomer = filter.getCostomer() == null ? "%" : filter.getCostomer();
+		return invoices.findByCostomerContaining(costomer);
 	}
-	
+
 }

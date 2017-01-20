@@ -2,17 +2,17 @@ package ie.gmit.mymanger.model;
 
 public enum StatusInvoice {
 
-	PENDENTE("Pendente"),
-	RECEBIDO("Recebido");
+	PENDING("Pending"),
+	RECEIVED("Received");
 	
-	private String descricao;
+	private String description;
 	
-	StatusInvoice(String descricao) {
-		this.descricao = descricao;
+	StatusInvoice(String description) {
+		this.description = description;
 	}
 	
-	public String getDescricao() {
-		return descricao;
+	public String getDescription() {
+		return description;
 	}
 	
 }

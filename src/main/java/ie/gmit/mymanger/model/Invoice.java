@@ -34,22 +34,23 @@ public class Invoice {
 	@NotNull(message = "Date de vencimento é obrigatória")
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@Temporal(TemporalType.DATE)
-	private Date dataVencimento;
+	private Date duedate;
 	
 	@NotNull(message = "Valor é obrigatório")
 	@DecimalMin(value = "0.01", message = "Valor não pode ser menor que 0,01")
 	@DecimalMax(value = "9999999.99", message = "Valor não pode ser maior que 9.999.999,99")
 	@NumberFormat(pattern = "#,##0.00")
-	private BigDecimal valor;
+	private BigDecimal total;
 	
 	@Enumerated(EnumType.STRING)
 	private StatusInvoice status;
+	
 
-	public Long getcode() {
+	public Long getCode() {
 		return code;
 	}
 
-	public void setcode(Long code) {
+	public void setCode(Long code) {
 		this.code = code;
 	}
 
@@ -61,20 +62,20 @@ public class Invoice {
 		this.costomer = costomer;
 	}
 
-	public Date getDataVencimento() {
-		return dataVencimento;
+	public Date getDuedate() {
+		return duedate;
 	}
 
-	public void setDataVencimento(Date dataVencimento) {
-		this.dataVencimento = dataVencimento;
+	public void setDuedate(Date duedate) {
+		this.duedate = duedate;
 	}
 
-	public BigDecimal getValor() {
-		return valor;
+	public BigDecimal getTotal() {
+		return total;
 	}
 
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
+	public void setTotal(BigDecimal total) {
+		this.total = total;
 	}
 
 	public StatusInvoice getStatus() {
@@ -85,8 +86,8 @@ public class Invoice {
 		this.status = status;
 	}
 	
-	public boolean isPendente() {
-		return StatusInvoice.PENDENTE.equals(this.status);
+	public boolean isPending() {
+		return StatusInvoice.PENDING.equals(this.status);
 	}
 
 	@Override
