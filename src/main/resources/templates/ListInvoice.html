@@ -60,10 +60,10 @@
 		   					</td>
 		   					<td class="text-center">
 		   						<a class="btn btn-link btn-xs" th:href="@{/invoices/{code}(code=${invoice.code})}" 
-		   								title="Editar" rel="tooltip" data-placement="top">
+		   								title="Edit" rel="tooltip" data-placement="top">
 		   							<span class="glyphicon glyphicon-pencil"></span>
 		   						</a>
-		   						<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal"
+		   						<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#modalDeletionConfirmation"
 		   								th:attr="data-code=${invoice.code}, data-customer=${invoice.customer}"
 		   								title="Delete" rel="tooltip" data-placement="top">
 		   							<span class="glyphicon glyphicon-remove"></span>
