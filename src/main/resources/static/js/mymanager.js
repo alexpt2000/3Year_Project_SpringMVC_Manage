@@ -12,7 +12,7 @@ $('#modalDeletionConfirmation').on('show.bs.modal', function(event) {
 	}
 	form.attr('action', action + codeInvoice);
 	
-	modal.find('.modal-body span').html('Are you sure you want to delete Invoice <strong>' + customerInvoice + '</strong>?');
+	modal.find('.modal-body span').html('Are you sure you want to delete Invoice <strong> - ' + customerInvoice + '</strong>?');
 });
 
 $(function() {
